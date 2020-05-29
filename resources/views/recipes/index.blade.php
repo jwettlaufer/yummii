@@ -26,7 +26,7 @@ Recipe Feed
       <div class="card-body">
         <p class="card-text">
         <p>
-            {{ $post->message }}
+            {{ $recipe->picture }}
         </p>
       </div>
       <div class="card-footer">
@@ -50,7 +50,7 @@ Recipe Feed
 </ul>
 <div class="row">
   <div class="col-12 text-enter">
-    {{$posts->links()}}
+    {{$recipes->links()}}
   </div>
 </div>
 -->

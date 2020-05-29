@@ -19,10 +19,6 @@ Edit Profile
       <input type="text" class="form-control" name="email" id="email" value="{{$user->email}}">
     </label>
     <br>
-    <label for="location">
-      <strong>Edit location:</strong>
-      <input type="text" class="form-control" name="location" id="location" value="{{$user->location}}">
-    </label>
   </div>
   <div class="form-group">
     <input type="submit" class="btn btn-warning" value="Update Profile">

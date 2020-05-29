@@ -1,9 +1,9 @@
 <div id="app1">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="{{ url('/recipes') }}">
             <img src="{{url('/img/logo.png')}}" style="height: 50px; width: 50px;" class="img-responsive">
         </a>
-        <a class="navbar-brand" href="{{ url('/posts') }}">
+        <a class="navbar-brand title" href="{{ url('/recipes') }}">
             {{ config('app.name') }}
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -14,7 +14,7 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
                 <li>
-                    <a class="nav-link" href="{{route('posts.index')}}">
+                    <a class="nav-link" href="{{route('recipes.index')}}">
                         Home</a>
                 </li>
                 @auth
