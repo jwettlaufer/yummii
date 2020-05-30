@@ -11,7 +11,7 @@ Edit Recipe
     <div class="form-group">
         <label for="message">
             Edit Recipe:
-            <textarea class="form-control" name="message" id="message" rows="5" cols="30">{{$recipe->message}}</textarea>
+            <textarea class="form-control" name="message" rows="5" cols="30">{{$recipe->message}}</textarea>
         </label>
     </div>
     <div class="form-group">

@@ -15,11 +15,11 @@ Recipe Feed
   <li>
     <div class="card" style="width: 18rem;">
       <a href="{{route('recipes.show', $recipe->id)}}">
-        <img src="{{ $recipe->picture }}" class="card-img-top" alt="{{$recipe->recipe_name}}">
+        <img src="{{ asset('/img/'.$recipe->picture)}}" class="card-img-top" alt="{{$recipe->title}}">
       </a>
       <div class="card-body">
         <p class="card-text">
-          {{$recipe->recipe_name}}
+          {{$recipe->title}}
         </p>
       </div>
     </div>

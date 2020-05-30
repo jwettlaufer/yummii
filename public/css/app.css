@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@import url(https://fonts.googleapis.com/css?family=Eric+One);@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
 
 /*!
  * Bootstrap v4.5.0 (https://getbootstrap.com/)
@@ -10928,6 +10928,11 @@ a.text-dark:focus {
   }
 }
 
+* {
+  list-style: none;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 .title {
   font-family: "Erica One";
   font-size: 1.5rem;
@@ -10946,5 +10951,9 @@ a.text-dark:focus {
 
 .navbar a {
   color: #545C66;
+}
+
+.form-group {
+  margin: 20px;
 }
 

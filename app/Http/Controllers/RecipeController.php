@@ -66,11 +66,23 @@ class RecipeController extends Controller
                 'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'directions' => 'required'
             ));
+            
+            $fileName = '';
+            if( $file = $request->file('picture'))
+            { $dest = 'img/';
+                $fileName = date('YmdHis') .
+                '_' .
+                str_replace(' ', '_', $file->getClientOriginalName()
+                ) .
+                '.' .
+                $file->getClientOriginalExtension();
+                $file->move($dest, $fileName);
+            }
 
             $recipe = new Recipe;
             $recipe->user_id = $user->id;
             $recipe->title = $validatedData['title'];
-            $recipe->picture = $validatedData['picture'];
+            $recipe->picture = $fileName;
             $recipe->directions = $validatedData['directions'];
             
             $recipe->save();

@@ -11,6 +11,11 @@ class RecipesTableSeeder extends Seeder
      */
     public function run()
     {
-        //file_get_contents( 'http://api.com/example' ); 
+        //
+       $recipe_api = file_get_contents( 'https://www.themealdb.com/api/json/v1/1/' ); 
+
+       $recipe_api = json_decode($recipe_api);
+
+
     }
 }
