@@ -10,39 +10,17 @@ Recipe Feed
 </div>
 @endif
 @include('partials.errors')
-<!--List of Recipes
 <ul id="app">
   @foreach($recipes as $recipe)
   <li>
-    <div class="card">
-      <div class="card-header">
-        <h2>
-          <img src="{{url('/img/logo.png')}}" style="height: 50px; width: 50px; border-radius: 50%;" class="img-responsive">
-          <a href="{{route('profile.show', $recipe->user->id)}}">
-            {{$recipe->recipe_name}}
-          </a>
-        </h2>
-      </div>
+    <div class="card" style="width: 18rem;">
+      <a href="{{route('recipes.show', $recipe->id)}}">
+        <img src="{{ $recipe->picture }}" class="card-img-top" alt="{{$recipe->recipe_name}}">
+      </a>
       <div class="card-body">
         <p class="card-text">
-        <p>
-            {{ $recipe->picture }}
+          {{$recipe->recipe_name}}
         </p>
-      </div>
-      <div class="card-footer">
-        <ul>
-          <li>
-            <a href="{{route('posts.show', $post->id)}}" class="btn btn-link">
-              Read More
-            </a>
-          </li>
-          <li class="pull-right">
-            @if (Auth::check())
-            <like :post="{{ $post->id }}" :liked="{{ $post->liked() ? 'true' : 'false' }}">
-            </like>
-            @endif
-          <li>
-        </ul>
       </div>
     </div>
   </li>
@@ -53,5 +31,4 @@ Recipe Feed
     {{$recipes->links()}}
   </div>
 </div>
--->
 @endsection

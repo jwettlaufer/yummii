@@ -27,10 +27,10 @@ class RecipeController extends Controller
             'users.name',
             'recipes.title',
             'recipes.picture',
-            'recipes.instructions'
+            'recipes.directions'
         )
         ->orderBy('recipes.id', 'desc')
-        ->SimplePaginate(6);
+        ->SimplePaginate(10);
 
     return view('recipes.index', compact('recipes'));
     }
@@ -63,15 +63,15 @@ class RecipeController extends Controller
         if ($user = Auth::user()) {
             $validatedData = $request->validate(array(
                 'title' => 'required',
-                'picture' => 'required',
-                'instructions' => 'required'
+                'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'directions' => 'required'
             ));
 
             $recipe = new Recipe;
             $recipe->user_id = $user->id;
             $recipe->title = $validatedData['title'];
             $recipe->picture = $validatedData['picture'];
-            $recipe->instructions = $validatedData['instructions'];
+            $recipe->directions = $validatedData['directions'];
             
             $recipe->save();
 
@@ -89,6 +89,10 @@ class RecipeController extends Controller
     public function show($id)
     {
         //
+        $recipe = Recipe::findOrFail($id);
+
+        $recipetUser = User::findOrFail($recipe->user_id);
+        return view('recipes.show', compact('recipes', 'recipeUser'));
     }
 
     /**
@@ -100,6 +104,13 @@ class RecipeController extends Controller
     public function edit($id)
     {
         //
+        if ($user = Auth::user()) {
+            $recipe = Recipe::findOrFail($id);
+
+            return view('recipes.edit', compact('recipe'));
+        }
+
+        return redirect('/recipes');
     }
 
     /**
@@ -112,6 +123,21 @@ class RecipeController extends Controller
     public function update(Request $request, $id)
     {
         //
+        if ($user = Auth::user()) {
+            $validatedData = $request->validate(array(
+                'title' => 'required',
+                'picture' => 'required',
+                'directions' => 'required'
+            ));
+
+            $recipe = Recipe::findOrFail($id);
+
+            Recipe::whereId($id)->update($validatedData);
+
+            return redirect('/recipes')->with('success', 'Recipe has been updated.');
+        }
+        // Redirect by default.
+        return redirect('/recipes');
     }
 
     /**
@@ -123,5 +149,13 @@ class RecipeController extends Controller
     public function destroy($id)
     {
         //
+        if ($user = Auth::user()) {
+            $recipe = Recipe::findOrFail($id);
+
+            $recipe->delete();
+
+            return redirect('/recipes')->with('success', 'post has been deleted.');
+        }
+        return redirect('/recipes');
     }
 }

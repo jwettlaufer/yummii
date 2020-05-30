@@ -1,1 +1,1 @@
-<p>&copy; Copyright 2020 Yummii. All Rights Reserved.</p>
+<div class="container"><p>&copy; Copyright 2020 Yummii. All Rights Reserved.</p></div>
