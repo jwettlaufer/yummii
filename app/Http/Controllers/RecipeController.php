@@ -73,9 +73,7 @@ class RecipeController extends Controller
                 $fileName = date('YmdHis') .
                 '_' .
                 str_replace(' ', '_', $file->getClientOriginalName()
-                ) .
-                '.' .
-                $file->getClientOriginalExtension();
+            );
                 $file->move($dest, $fileName);
             }
 
