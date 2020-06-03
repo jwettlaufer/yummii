@@ -101,8 +101,8 @@ class RecipeController extends Controller
         //
         $recipe = Recipe::findOrFail($id);
 
-        $recipetUser = User::findOrFail($recipe->user_id);
-        return view('recipes.show', compact('recipes', 'recipeUser'));
+        $recipeUser = User::findOrFail($recipe->user_id);
+        return view('recipes.show', compact('recipe', 'recipeUser'));
     }
 
     /**
