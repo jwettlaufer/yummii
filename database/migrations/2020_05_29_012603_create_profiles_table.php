@@ -19,7 +19,7 @@ class CreateProfilesTable extends Migration
             $table->string( 'profile_pic' );
             $table->unsignedBigInteger( 'user_id' )->nullable();
             $table->rememberToken();
-            $table->timestamp('posted_at');
+            $table->timestamps();
 
             $table->foreign( 'user_id' )
                 ->references( 'id' )

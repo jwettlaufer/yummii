@@ -14,22 +14,15 @@ class CreateRecipesTable extends Migration
     public function up()
     {
         Schema::create('recipes', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('title');
             $table->string('picture');
             $table->string('directions');
-            $table->unsignedBigInteger('ingredient_id')->nullable();
             $table->timestamps();
-            /** 
-             *   $table->foreign( 'ingredient_id' )
-             *  ->references( 'id' )
-             *  ->on( 'ingredients' )
-             * ->onDelete( 'cascade' );*/
         });
     }
-
-    /**
+    /** 
      * Reverse the migrations.
      *
      * @return void
