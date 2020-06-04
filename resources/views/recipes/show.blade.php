@@ -12,7 +12,7 @@
   <div id="app">
     <div class="card-body">
       <p class="card-text">
-        <strong>Instructions:</strong>
+        <strong>Directions:</strong>
         <br>
         {{$recipe->directions}}
       </p>
