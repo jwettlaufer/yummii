@@ -1,24 +1,34 @@
 @extends ('layout')
 @section('title')
-<div class="centered">{{$recipe->title}}</div>
+{{$recipe->title}}
 @endsection
 @section('content')
 @include('partials.errors')
 <div class="card">
   <div class="card-header centered">
-  <img src="{{ asset('/img/'.$recipe->picture)}}" class="card-img-top" alt="{{$recipe->title}}">
-  <h6>Created by: <a href="{{route('profile.show', $recipe->user->id)}}">{{$recipeUser->name}}</a></h6>
+    <img src="{{$recipe->picture}}" class="card-img-top" alt="{{$recipe->title}}">
+    <h6>Created by: <a href="{{route('profile.show', $recipe->user->id)}}">{{$recipeUser->name}}</a></h6>
   </div>
   <div id="app">
     <div class="card-body">
-      <p class="card-text">
-        <strong>Directions:</strong>
-        <br>
-        {{$recipe->directions}}
-      </p>
+      <div class="card-text">
+        <h4>Ingredients:</h4>
+        <ul class="ing-list">
+          @foreach ($recipe->ingredients as $ingredient)
+          <li>
+            {{$ingredient->ingredient}}
+          </li>
+          @endforeach
+        </ul>
+        <hr>
+        <h4>Directions:</h4>
+        <p>
+          {{$recipe->directions}}
+        </p>
+      </div>
     </div>
     <div class="card-footer">
-      <ul class="pull-right">
+      <ul>
         @auth
         <li>
           <a href="{{route('recipes.edit', $recipe->id)}}" class="btn btn-primary btn-sm">

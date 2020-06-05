@@ -73,6 +73,15 @@ main {
     }
 }
 
+.ing-list li::before {
+    content: "•";
+    color: #FF7272;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+
 .footer {
     width: 100%;
     height: 60px;

@@ -5,17 +5,29 @@ Edit Recipe
 @endsection
 @section('content')
 @include('partials.errors')
-<form method="post" action="{{route('recipes.update', $recipe->id)}}">
+<form method="post" enctype="multipart/form-data" action="{{route('recipes.update', $recipe->id)}}">
     @csrf
     @method('PATCH')
     <div class="form-group">
-        <label for="message">
-            Edit Recipe:
-            <textarea class="form-control" name="message" rows="5" cols="30">{{$recipe->message}}</textarea>
+        <label for="title">
+            Title:
         </label>
+        <input type="text" class="form-control" name="title" value="{{$recipe->title}}">
     </div>
     <div class="form-group">
-        <input type="submit" class="btn btn-warning" value="Update Recipe">
+        <label for="picture">
+            Upload Image of Recipe:
+        </label>
+        <input type="file" class="form-control-file" name="picture" accept="image/*" onchange="readURL(this)">
+    </div>
+    <div class="form-group">
+        <label for="directions">
+            Directions:
+        </label>
+        <textarea class="form-control" name="directions" rows="5" cols="30">{{$recipe->directions}}</textarea>
+    </div>
+    <div class="form-group">
+        <input type="submit" class="btn btn-warning" value="Edit Recipe">
     </div>
 </form>
 @endsection

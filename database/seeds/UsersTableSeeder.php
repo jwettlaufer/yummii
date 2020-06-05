@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
         //
         $faker = Factory::create();
 
-        foreach(range(1, 20) as $index) {
+        foreach(range(1, 50) as $index) {
             $user = new User;
             $user->name = $faker->name;
             $user->email = $faker->email;

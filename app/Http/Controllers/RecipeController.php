@@ -30,7 +30,7 @@ class RecipeController extends Controller
             'recipes.directions'
         )
         ->orderBy('recipes.id', 'desc')
-        ->SimplePaginate(10);
+        ->SimplePaginate(12);
 
     return view('recipes.index', compact('recipes'));
     }

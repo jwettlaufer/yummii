@@ -28,6 +28,5 @@ Add Recipe
     <div class="form-group">
         <input type="submit" class="btn btn-warning" value="Add Recipe">
     </div>
-
 </form>
 @endsection

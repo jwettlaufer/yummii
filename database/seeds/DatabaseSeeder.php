@@ -16,5 +16,11 @@ class DatabaseSeeder extends Seeder
         (new UsersTableSeeder)->run();
 
         (new ProfilesTableSeeder)->run();
+
+        (new RecipesTableSeeder)->run();
+
+        (new IngredientsTableSeeder)->run();
+        
+        (new IngredientRecipeTableSeeder)->run();
     }
 }
