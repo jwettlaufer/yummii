@@ -2,14 +2,13 @@
   <div class="form-group">
     <label>Select Ingredients:</label>
     <br />
-    <select v-model="ingredient" id="ing-select" multiple="multiple">
+    <select v-model="selectIng" name="ingredients[]" id="ing-select" multiple="multiple">
       <option
         v-for="ingredient in ingredients"
         :value="ingredient.id"
         :key="ingredient.id"
       >{{ ingredient.ingredient }}</option>
     </select>
-    <p>{{ selected }}</p>
   </div>
 </template>
 
@@ -19,7 +18,7 @@ export default {
   props: ["options", "value"],
   data() {
     return {
-      ingredient: "",
+      selectIng: [],
       ingredients: []
     };
   },
@@ -51,15 +50,15 @@ export default {
     watch: {
       value: function(value) {
         // update value
-        $(this.$el)
+        $("#ing-select")
           .val(value)
           .trigger("change");
       },
       options: function(options) {
         // update options
-        $(this.$el)
+        $("#ing-select")
           .empty()
-          .select2({ data: options });
+          .select2({ data: ingredients });
       }
     },
     destroyed: function() {

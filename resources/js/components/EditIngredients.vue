@@ -26,7 +26,7 @@
 
 <script>
 export default {
-  name: "ingredient-select",
+  name: "edit-ingredients",
   mounted() {
     console.log("Component mounted.");
   },

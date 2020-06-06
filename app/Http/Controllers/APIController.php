@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Ingredient;
+use App\Recipe;
 use Illuminate\Http\Request;
 
 class APIController extends Controller
@@ -17,5 +18,4 @@ class APIController extends Controller
         $ingredients = Ingredient::all();
         return $ingredients;
     }
-   
 }

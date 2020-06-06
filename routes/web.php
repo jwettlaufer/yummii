@@ -24,3 +24,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('recipes', 'RecipeController');
 
 Route::resource('profile', 'ProfileController');
+
+Route::get('recipes/search', 'SearchController@index');

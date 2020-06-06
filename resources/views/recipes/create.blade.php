@@ -32,9 +32,5 @@ Add Recipe
             <input type="submit" class="btn btn-warning" value="Add Recipe">
         </div>
     </form>
-    <!--
-    <ingredient-select>
-    <ingredient-select/>
--->
 </div>
 @endsection

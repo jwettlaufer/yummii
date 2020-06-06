@@ -5,6 +5,7 @@ Edit Recipe
 @endsection
 @section('content')
 @include('partials.errors')
+<div id="app">
 <form method="post" enctype="multipart/form-data" action="{{route('recipes.update', $recipe->id)}}">
     @csrf
     @method('PATCH')
@@ -26,8 +27,11 @@ Edit Recipe
         </label>
         <textarea class="form-control" name="directions" rows="5" cols="30">{{$recipe->directions}}</textarea>
     </div>
+    <select-ingredients>
+    </select-ingredients>
     <div class="form-group">
         <input type="submit" class="btn btn-warning" value="Edit Recipe">
     </div>
 </form>
+</div>
 @endsection
