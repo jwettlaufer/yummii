@@ -7,7 +7,8 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
-window.jQuery = require('../../node_modules/jquery').default;
+window.axios = require('../../node_modules/axios').default;
+global.$ = global.jQuery = require('jquery');
 window.Select2 = require('../../node_modules/select2').default;
 /**
  * The following block of code may be used to automatically register your
@@ -23,6 +24,8 @@ window.Select2 = require('../../node_modules/select2').default;
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('recipe-create-form', require('./components/RecipeCreateForm.vue').default);
 Vue.component('recipe-edit-form', require('./components/RecipeEditForm.vue').default);
+Vue.component('ingredient-select', require('./components/IngredientSelect.vue').default);
+Vue.component('select-ingredients', require('./components/SelectIngredients.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -30,5 +33,5 @@ Vue.component('recipe-edit-form', require('./components/RecipeEditForm.vue').def
  */
 
 const app = new Vue({
-    el: '#app',
+    el: '#app'
 });
