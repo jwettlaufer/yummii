@@ -11,6 +11,7 @@ Recipe Feed
 @endif
 @include('partials.errors')
 <ul id="app" class="recipe-grid">
+<search-recipes></search-recipes>
   @foreach($recipes as $recipe)
   <li>
     <div class="card recipe-card">

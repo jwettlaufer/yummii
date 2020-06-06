@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 Use App\Recipe;
+Use App\Ingredient;
 use App\User;
 use App\Profile;
 use Auth;
@@ -82,8 +83,9 @@ class RecipeController extends Controller
             $recipe->title = $validatedData['title'];
             $recipe->picture = $fileName;
             $recipe->directions = $validatedData['directions'];
-            
             $recipe->save();
+
+            $recipe->ingredients()->attach($request->ingredients);
 
             return redirect('/recipes')->with('success', 'Recipe has been saved.');
         }
