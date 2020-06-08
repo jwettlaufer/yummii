@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-Use App\Recipe;
-Use App\Ingredient;
+use App\Recipe;
+use App\Ingredient;
 use App\User;
 use App\Profile;
 use Auth;
@@ -19,21 +19,21 @@ class RecipeController extends Controller
     public function index()
     {
         //
-        
-        $recipes = Recipe::query()
-        ->join('users', 'recipes.user_id', '=', 'users.id')
-        ->select(
-            'recipes.id',
-            'users.id as user_id',
-            'users.name',
-            'recipes.title',
-            'recipes.picture',
-            'recipes.directions'
-        )
-        ->orderBy('recipes.id', 'desc')
-        ->SimplePaginate(12);
 
-    return view('recipes.index', compact('recipes'));
+        $recipes = Recipe::query()
+            ->join('users', 'recipes.user_id', '=', 'users.id')
+            ->select(
+                'recipes.id',
+                'users.id as user_id',
+                'users.name',
+                'recipes.title',
+                'recipes.picture',
+                'recipes.directions'
+            )
+            ->orderBy('recipes.id', 'desc')
+            ->paginate(12);
+
+        return view('recipes.index', compact('recipes'));
     }
 
     /**
@@ -67,14 +67,13 @@ class RecipeController extends Controller
                 'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'directions' => 'required'
             ));
-            
+
             $fileName = '';
-            if( $file = $request->file('picture'))
-            { $dest = 'img/';
+            if ($file = $request->file('picture')) {
+                $dest = 'img/';
                 $fileName = date('YmdHis') .
-                '_' .
-                str_replace(' ', '_', $file->getClientOriginalName()
-            );
+                    '_' .
+                    str_replace(' ', '_', $file->getClientOriginalName());
                 $file->move($dest, $fileName);
             }
 
@@ -166,8 +165,51 @@ class RecipeController extends Controller
 
             $recipe->delete();
 
-            return redirect('/recipes')->with('success', 'post has been deleted.');
+            return redirect('/recipes')->with('success', 'recipe has been deleted.');
         }
         return redirect('/recipes');
+    }
+
+       /**
+     * favorite a particular recipe
+     *
+     * @param  Recipe $recipe
+     * @return Response
+     */
+    public function favoriteRecipe(Recipe $recipe)
+    {
+        Auth::user()->favorites()->attach($recipe->id);
+
+        return back();
+    }
+
+    /**
+     * Unfavorite a particular recipe
+     *
+     * @param  Recipe $recipe
+     * @return Response
+     */
+    public function unFavoriteRecipe(Recipe $recipe)
+    {
+        Auth::user()->favorites()->detach($recipe->id);
+
+        return back();
+    }
+
+    public function faveCount(Request $request, $id)
+    {
+        $recipe = Recipe::findOrFail($id);
+        return $recipe->favorites()->count();
+    }
+
+    public function search()
+    {
+       /* $recipes = Recipe::whereHas('ingredients', function ($q) use ($ingredientIds) {
+            $q->whereIn('id', $ingredientIds);
+        })->get();
+        foreach ($recipes as $recipe) {
+            echo $recipe->title . '<br/>';
+        }*/
+        return view('recipes.search');
     }
 }

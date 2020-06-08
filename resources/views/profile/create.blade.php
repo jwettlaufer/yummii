@@ -1,11 +1,11 @@
 @extends ('layout')
 
 @section('title')
-Edit Profile
+Create Profile
 @endsection
 @section('content')
 @include('partials.errors')
-<form method="post" action="{{route('profile.update', $user->id, $profile->id)}}">
+<form method="post" action="{{route('profile.update', $user->id)}}">
   @csrf
   @method('PATCH')
   <div class="form-group">

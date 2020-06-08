@@ -20,4 +20,16 @@ class Recipe extends Model
       {
         return $this->belongsToMany('App\Ingredient', 'ingredient_recipe');
       }
+
+      public function favorited()
+      {
+        return (bool) Favorite::where('user_id', Auth::id())
+          ->where('recipe_id', $this->id)
+          ->first();
+      }
+    
+      public function favorites()
+      {
+        return $this->hasMany(Favorite::class, 'recipe_id');
+      }
 }

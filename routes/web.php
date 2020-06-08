@@ -25,4 +25,8 @@ Route::resource('recipes', 'RecipeController');
 
 Route::resource('profile', 'ProfileController');
 
-Route::get('recipes/search', 'SearchController@index');
+Route::post('/favorite/{recipe}', 'RecipeController@FavoriteRecipe');
+Route::post('/unfavorite/{recipe}', 'RecipeController@unFavoriteRecipe');
+
+Route::get('/favorite/{recipe}', 'RecipeController@faveCount');
+Route::get('/my_favorites', 'UserController@myFavorites')->middleware('auth');

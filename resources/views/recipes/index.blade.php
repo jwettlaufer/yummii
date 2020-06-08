@@ -11,7 +11,7 @@ Recipe Feed
 @endif
 @include('partials.errors')
 <ul id="app" class="recipe-grid">
-<search-recipes></search-recipes>
+  <search-recipes></search-recipes>
   @foreach($recipes as $recipe)
   <li>
     <div class="card recipe-card">
@@ -22,6 +22,12 @@ Recipe Feed
         <p class="card-text">
           <strong>{{$recipe->title}}</strong>
         </p>
+      </div>
+      <div class="card-footer">
+        @if (Auth::check())
+        <favorite :recipe="{{ $recipe->id }}" :favorited="{{ $recipe->favorited() ? 'true' : 'false' }}">
+        </favorite>
+        @endif
       </div>
     </div>
   </li>

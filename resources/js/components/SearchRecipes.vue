@@ -1,39 +1,74 @@
 <template>
-  <div>
-    <input type="text" placeholder="Search" v-model="query" />
-    <ul v-if="results.length > 0 && query">
-      <li v-for="result in results.slice(0,10)" :key="result.id">
-        <a :href="result.url">
-          <div v-text="result.title"></div>
-        </a>
-      </li>
-    </ul>
+  <div class="form-group">
+    <label>Search by Ingredients:</label>
+    <br />
+    <select v-model="selectIng" name="ingredients[]" id="ing-select" multiple="multiple">
+      <option
+        v-for="ingredient in ingredients"
+        :value="ingredient.id"
+        :key="ingredient.id"
+      >{{ ingredient.ingredient }}</option>
+    </select>
   </div>
 </template>
+
 <script>
 export default {
-  name: "search-recipes",
+  name: "select-ingredients",
+  props: ["options", "value"],
   data() {
     return {
-      query: null,
-      results: []
+      selectIng: [],
+      ingredients: []
     };
   },
-  watch: {
-    query(after, before) {
-      this.searchRecipes();
-    }
+  mounted() {
+    var vm = this;
+    this.getIngredients();
+    $("#ing-select")
+      // init select2
+      .select2()
+      .val(this.value)
+      .trigger("change")
+      // emit event on change.
+      .on("change", function() {
+        vm.$emit("input", this.value);
+      });
   },
   methods: {
-    searchRecipes() {
+    getIngredients() {
       axios
-        .get("recipes/search", { params: { query: this.query } })
-        .then(response => (this.results = response.data))
-        .catch(error => {});
+        .get("/yummii/public/api/getIngredients")
+        .then(response => {
+          this.ingredients = response.data;
+          console.log(this.ingredients);
+        })
+        .then(response => {
+          $("#ing-select").select2();
+        });
+    },
+    watch: {
+      value: function(value) {
+        // update value
+        $("#ing-select")
+          .val(value)
+          .trigger("change");
+      },
+      options: function(options) {
+        // update options
+        $("#ing-select")
+          .empty()
+          .select2({ data: ingredients });
+      }
+    },
+    destroyed: function() {
+      $("#ing-select")
+        .off()
+        .select2("destroy");
     }
   }
 };
 </script>
-<script>
-export default {};
-</script>
+
+<style scoped>
+</style>

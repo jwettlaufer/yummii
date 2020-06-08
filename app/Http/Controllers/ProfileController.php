@@ -21,13 +21,13 @@ class ProfileController extends Controller
         //
         if ($user = Auth::user()) {
             $user = Auth::user();
-            $profiles = Profile::query()
+            $profile = Profile::query()
                 ->join('users', 'profiles.user_id', '=', 'users.id') 
-                ->get();
-            return view('profile.index', compact('profiles', 'user'));
+                ->first();
+            return view('profile.index', compact('profile', 'user'));
         }
         // Redirect by default.
-        return redirect('/posts');
+        return redirect('/recipes');
     }
 
     /**
@@ -76,11 +76,11 @@ class ProfileController extends Controller
         //
         if ($user = Auth::user()) {
             $user = User::findOrFail($id);
-
-            return view('profile.edit', compact('user'));
+            $profile = Profile::findOrFail($id);
+            return view('profile.edit', compact('profile','user'));
         }
 
-        return redirect('/posts');
+        return redirect('/recipes');
     }
 
     /**
@@ -93,22 +93,16 @@ class ProfileController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $profile = Profile::findOrFail($id);
         if ($user = Auth::user()) {
             $validatedData = $request->validate(array(
                 'name' => 'required'
             ));
-
             User::whereId($id)->update($validatedData);
 
             return redirect('/profile')->with('success', 'Profile has been updated.');
         }
         // Redirect by default.
-        return redirect('/posts');
-    }
-
-    public function user($id)
-    {
-        $user = User::find($id);
-        return view('usersView', compact('user'));
+        return redirect('/recipes');
     }
 }

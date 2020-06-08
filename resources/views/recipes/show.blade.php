@@ -43,6 +43,12 @@
           </form>
         </li>
         @endauth
+        <li class="pull-right">
+          @if (Auth::check())
+          <favorite :recipe="{{ $recipe->id }}" :favorited="{{ $recipe->favorited() ? 'true' : 'false' }}">
+          </favorite>
+          @endif
+        </li>
       </ul>
     </div>
   </div>

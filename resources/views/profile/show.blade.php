@@ -3,7 +3,6 @@
 @section('title')
 Profile
 @endsection
-
 @section('content')
 @include('partials.errors')
 <div class="card">

@@ -18,7 +18,7 @@ class ProfilesTableSeeder extends Seeder
         //
         $faker = Factory::create();
     
-        foreach( range(1, 20) as $index )
+        foreach( range(1, 50) as $index )
          {
             DB::table( 'profiles' )->insert( array(
                 'profile_pic' => $faker->imageUrl($width = 400, $height = 400, $category = 'food'),
