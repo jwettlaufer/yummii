@@ -5,9 +5,15 @@ Edit Profile
 @endsection
 @section('content')
 @include('partials.errors')
-<form method="post" action="{{route('profile.update', $user->id, $profile->id)}}">
+<form method="post" enctype="multipart/form-data" action="{{route('profile.update', $user->id, $profile->id)}}">
   @csrf
   @method('PATCH')
+  <div class="form-group">
+        <label for="picture">
+            Upload Profile Pic:
+        </label>
+        <input type="file" class="form-control-file" name="picture" accept="image/*" onchange="readURL(this)">
+    </div>
   <div class="form-group">
     <label for="name">
       <strong>Edit name:</strong>

@@ -1,24 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Ingredient;
-use App\Recipe;
+
 use Illuminate\Http\Request;
 
-class APIController extends Controller
+class ApiSearchController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-
-    public function getIngredients()
-    {
-        $ingredients = Ingredient::all();
-        return $ingredients;
-    }
-
+    //
     public function search(Request $request)
     {
         // First we define the error message we are going to show if no keywords
@@ -29,10 +17,10 @@ class APIController extends Controller
         if($request->has('q')) {
 
             // Using the Laravel Scout syntax to search the products table.
-            $recipes = Recipe::search($request->get('q'))->get();
+            $posts = Product::search($request->get('q'))->get();
 
             // If there are results return them, if none, return the error message.
-            return $recipes->count() ? $recipes : $error;
+            return $posts->count() ? $posts : $error;
 
         }
 

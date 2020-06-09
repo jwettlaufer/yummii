@@ -65,6 +65,17 @@ export default {
       $("#ing-select")
         .off()
         .select2("destroy");
+    },
+    created() {
+      Fire.$on("searching", () => {
+        let query = this.$parent.search;
+        axios
+          .get('"/yummii/public/api/findRecipe?q=' + query)
+          .then(data => {
+            this.recipes = data.data;
+          })
+          .catch(() => {});
+      });
     }
   }
 };

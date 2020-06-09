@@ -14,9 +14,11 @@
         "guzzlehttp/guzzle": "^6.3",
         "jzonta/faker-restaurant": "^1.1",
         "laravel/framework": "^7.0",
+        "laravel/scout": "^8.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
-        "mbezhanov/faker-provider-collection": "^1.2"
+        "mbezhanov/faker-provider-collection": "^1.2",
+        "yab/laravel-scout-mysql-driver": "^3.0"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

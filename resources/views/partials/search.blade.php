@@ -1,8 +1,10 @@
 <form action="{{route('search')}}" method="post" role="search">
-    {{ csrf_field() }}
+@csrf
     <div class="input-group">
-        <input type="text" class="form-control" name="q" placeholder="Search recipes"> <span class="input-group-btn">
-            <button type="submit" class="btn btn-warning">
+        <input type="search" class="form-control" name="q"
+            placeholder="Search recipes"> <span class="input-group-btn">
+            <span class="input-group-prepend">
+            <button type="submit" class="btn btn-primary">
                 Search
             </button>
         </span>

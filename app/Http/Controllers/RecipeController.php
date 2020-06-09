@@ -170,7 +170,7 @@ class RecipeController extends Controller
         return redirect('/recipes');
     }
 
-       /**
+    /**
      * favorite a particular recipe
      *
      * @param  Recipe $recipe
@@ -202,14 +202,12 @@ class RecipeController extends Controller
         return $recipe->favorites()->count();
     }
 
-    public function search()
+    public function search(Request $request)
     {
-       /* $recipes = Recipe::whereHas('ingredients', function ($q) use ($ingredientIds) {
-            $q->whereIn('id', $ingredientIds);
-        })->get();
-        foreach ($recipes as $recipe) {
-            echo $recipe->title . '<br/>';
-        }*/
-        return view('recipes.search');
+        $q = $request->get('q');
+        $recipes = Recipe::where('title', 'like', '%' . $q . '%')->paginate(8);
+        if (count($recipes) > 0)
+            return view('recipes.index', compact('recipes'));
+        else return view('recipes.index')->withMessage('No recipes related to your search. Please try something else.');
     }
 }

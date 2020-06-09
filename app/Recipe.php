@@ -4,12 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Scout\Searchable;
 
 class Recipe extends Model
 {
+use Searchable;
     //
     protected $fillable = array(
-        'recipe_name', 'picture', 'description',
+        'title', 'picture', 'description',
       );
     
       public function user()
