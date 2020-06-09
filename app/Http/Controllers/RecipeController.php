@@ -204,10 +204,14 @@ class RecipeController extends Controller
 
     public function search(Request $request)
     {
-        $q = $request->get('q');
-        $recipes = Recipe::where('title', 'like', '%' . $q . '%')->paginate(8);
-        if (count($recipes) > 0)
-            return view('recipes.index', compact('recipes'));
-        else return view('recipes.index')->withMessage('No recipes related to your search. Please try something else.');
+        $keyword = $request->get('q');
+        $recipes = Recipe::where('title', 'like', '%' . $keyword . '%')->orWhereHas('ingredients', function($q) use ($keyword) {
+            $q->where('ingredient', 'like', '%' . $keyword . '%');
+        })->paginate(12);
+        if (count($recipes) > 0) {
+            return view('recipes.index', compact('recipes'))->withDetails($recipes)->withQuery($keyword);
+        } else {
+            return redirect('/recipes')->withErrors('No recipes related to your search. Please try something else.');
+        }
     }
 }

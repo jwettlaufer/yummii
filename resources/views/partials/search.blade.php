@@ -1,12 +1,11 @@
 <form action="{{route('search')}}" method="post" role="search">
-@csrf
+    @csrf
     <div class="input-group">
-        <input type="search" class="form-control" name="q"
-            placeholder="Search recipes"> <span class="input-group-btn">
+        <input type="search" class="form-control" name="q" placeholder="Find a recipe..."> <span class="input-group-btn">
             <span class="input-group-prepend">
-            <button type="submit" class="btn btn-primary">
-                Search
-            </button>
-        </span>
+                <button type="submit" class="rouge btn">
+                    <i class="fa fa-search"></i>
+                </button>
+            </span>
     </div>
 </form>

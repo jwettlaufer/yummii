@@ -22,7 +22,7 @@ class ProfileController extends Controller
         if ($user = Auth::user()) {
             $user = Auth::user();
             $profile = Profile::query()
-                ->join('users', 'profiles.user_id', '=', 'users.id') 
+                ->join('users', 'profiles.user_id', '=', 'users.id')
                 ->first();
             return view('profile.index', compact('profile', 'user'));
         }
@@ -62,7 +62,7 @@ class ProfileController extends Controller
         //
         $user = User::findOrFail($id);
         $profile = Profile::findOrFail($id);
-        return view('profile.show', compact('profile','user'));
+        return view('profile.show', compact('profile', 'user'));
     }
 
     /**
@@ -77,7 +77,7 @@ class ProfileController extends Controller
         if ($user = Auth::user()) {
             $user = User::findOrFail($id);
             $profile = Profile::findOrFail($id);
-            return view('profile.edit', compact('profile','user'));
+            return view('profile.edit', compact('profile', 'user'));
         }
 
         return redirect('/recipes');
@@ -96,10 +96,39 @@ class ProfileController extends Controller
         $profile = Profile::findOrFail($id);
         if ($user = Auth::user()) {
             $validatedData = $request->validate(array(
-                'name' => 'required'
+                'name' => 'required',
             ));
             User::whereId($id)->update($validatedData);
+            $user = Auth::user();
 
+            request()->validate([
+                'profile_pic' => 'image|mimes:jpeg,jpg,png,gif,svg|max:2048'
+            ]);
+
+            // Set up image file name and value.
+            $imgName = ''; //default filename (empty)
+            //Handle file upload
+            if ($file = request()->file('profile_pic')) {
+                //File dastination and naming...
+                $dest = 'img/';
+                $imgName = date('YmdHis') .
+                    '_' .
+                    str_replace(' ', '_', $file->getClientOriginalName()) .
+                    '.' .
+                    $file->getClientOriginalExtension();
+
+                //Move the temporary file to a final directory
+                $file->move(
+                    $dest, //First argument is the file destination
+                    $imgName //Second argument is the file name
+                );
+            }
+            $profile = Profile::where("user_id", "=", $user->id)->firstOrFail();
+            $profile = new Profile;
+            $profile->user_id = $user->id;
+
+            $profile->profile_pic = $imgName;
+            $profile->save();  
             return redirect('/profile')->with('success', 'Profile has been updated.');
         }
         // Redirect by default.

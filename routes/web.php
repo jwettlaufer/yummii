@@ -34,3 +34,4 @@ Route::get('/favorite/{recipe}', 'RecipeController@faveCount');
 Route::get('/my_favorites', 'UserController@myFavorites')->middleware('auth');
 
 Route::post('/recipes/search', 'RecipeController@search')->name('search');
+Route::get('/user_recipes', 'UserController@userRecipes')->middleware('auth');

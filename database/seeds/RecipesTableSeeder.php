@@ -18,7 +18,7 @@ class RecipesTableSeeder extends Seeder
         //
         $faker = Faker\Factory::create();
         $faker->addProvider(new \FakerRestaurant\Provider\en_US\Restaurant($faker));
-        foreach(range(1, 25) as $index){
+        foreach(range(1, 50) as $index){
             DB::table('recipes')->insert(array(
                 'title' => $faker->foodName,
                 'user_id' => $faker->randomElement(User::pluck( 'id' )->toArray()),

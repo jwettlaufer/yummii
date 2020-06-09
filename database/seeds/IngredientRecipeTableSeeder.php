@@ -16,7 +16,7 @@ class IngredientRecipeTableSeeder extends Seeder
     {
         //
         $faker = Faker\Factory::create();
-        foreach(range(1, 200) as $index) {
+        foreach(range(1, 500) as $index) {
             DB::table('ingredient_recipe')->insert(array(
                 'recipe_id' => $faker->randomElement(Recipe::pluck( 'id' )->toArray()),
                 'ingredient_id' => $faker->randomElement(Ingredient::pluck( 'id' )->toArray())

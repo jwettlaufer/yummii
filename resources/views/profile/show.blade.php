@@ -14,10 +14,10 @@ Profile
     <p class="card-text">
       <ul>
         <li>
-          <strong>Email:</strong> {{$user->email}}
+          <strong>Email:</strong> <p>{{$user->email}}</p>
         </li>
         <li>
-        <strong>Bio:</strong> {{$profile->bio}}
+        <strong>Bio:</strong> <p>{{$profile->bio}}</p>
         </li>
       </ul>
     </p>

@@ -17,7 +17,7 @@ class IngredientsTableSeeder extends Seeder
         //
         $faker = Faker\Factory::create();
         $faker->addProvider(new \Bezhanov\Faker\Provider\Food($faker));
-        foreach(range(1, 100) as $index){
+        foreach(range(1, 200) as $index){
             DB::table('ingredients')->insert(array(
                 'ingredient' => $faker->ingredient
             ));

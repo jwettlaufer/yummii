@@ -6,7 +6,11 @@
 @include('partials.errors')
 <div class="card">
   <div class="card-header centered">
+    @if((strpos($recipe->picture, 'http://', 0)===false) && (strpos($recipe->picture, 'https://', 0)===false))
+    <img src="{{asset('img/' .$recipe->picture)}}" class="card-img-top" alt="{{$recipe->title}}">
+    @else
     <img src="{{$recipe->picture}}" class="card-img-top" alt="{{$recipe->title}}">
+    @endif
     <h6>Created by: <a href="{{route('profile.show', $recipe->user->id)}}">{{$recipeUser->name}}</a></h6>
   </div>
   <div id="app">
