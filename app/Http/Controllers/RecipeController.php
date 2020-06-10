@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Recipe;
 use App\Ingredient;
+use App\Category;
 use App\User;
 use App\Profile;
 use Auth;
@@ -204,9 +205,12 @@ class RecipeController extends Controller
 
     public function search(Request $request)
     {
+        //Search by recipe name, ingredient or category.
         $keyword = $request->get('q');
         $recipes = Recipe::where('title', 'like', '%' . $keyword . '%')->orWhereHas('ingredients', function($q) use ($keyword) {
             $q->where('ingredient', 'like', '%' . $keyword . '%');
+        })->orWhereHas('categories', function($q) use ($keyword) {
+            $q->where('category', 'like', '%' . $keyword . '%');
         })->paginate(12);
         if (count($recipes) > 0) {
             return view('recipes.index', compact('recipes'))->withDetails($recipes)->withQuery($keyword);

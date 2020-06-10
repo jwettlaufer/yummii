@@ -22,5 +22,9 @@ class DatabaseSeeder extends Seeder
         (new IngredientsTableSeeder)->run();
         
         (new IngredientRecipeTableSeeder)->run();
+
+        (new CategoriesTableSeeder)->run();
+
+        (new CategoryRecipeTableSeeder)->run();
     }
 }

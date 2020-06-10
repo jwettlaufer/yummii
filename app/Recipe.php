@@ -23,6 +23,11 @@ use Searchable;
         return $this->belongsToMany('App\Ingredient', 'ingredient_recipe');
       }
 
+      public function categories()
+      {
+        return $this->belongsToMany('App\Category', 'category_recipe');
+      }
+
       public function favorited()
       {
         return (bool) Favorite::where('user_id', Auth::id())

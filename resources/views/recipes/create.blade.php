@@ -28,6 +28,8 @@ Add Recipe
         </div>
         <select-ingredients>
         </select-ingredients>
+        <select-categories>
+        </select-categories>
         <div class="form-group">
             <input type="submit" class="btn btn-warning" value="Add Recipe">
         </div>

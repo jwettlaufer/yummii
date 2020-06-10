@@ -32,6 +32,11 @@ Recipe Feed
         </p>
       </div>
       <div class="card-footer">
+        <div class="pull-left">
+          @foreach ($recipe->categories as $category)
+          <p>{{$category->category}}</p>
+          @endforeach
+        </div>
         <div class="pull-right">
           @if (Auth::check())
           <favorite :recipe="{{ $recipe->id }}" :favorited="{{ $recipe->favorited() ? 'true' : 'false' }}">

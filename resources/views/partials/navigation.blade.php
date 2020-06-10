@@ -26,7 +26,7 @@
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
-                <li>
+                <li class="nav-item">
                     @include('partials.search')
                 </li>
                 <!-- Authentication Links -->

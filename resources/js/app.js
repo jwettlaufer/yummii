@@ -21,6 +21,7 @@ window.Select2 = require('../../node_modules/select2').default;
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+Vue.component('select-categories', require('./components/SelectCategories.vue').default);
 Vue.component('select-ingredients', require('./components/SelectIngredients.vue').default);
 //Vue.component('edit-ingredients', require('./components/EditIngredients.vue').default);
 Vue.component('favorite', require('./components/Favorite.vue').default);

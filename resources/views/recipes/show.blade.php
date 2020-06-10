@@ -29,6 +29,15 @@
         <p>
           {{$recipe->directions}}
         </p>
+        <hr>
+        <h4>Categories:</h4>
+        <ul>
+          @foreach ($recipe->categories as $category)
+          <li>
+            {{$category->category}}
+          </li>
+          @endforeach
+        </ul>
       </div>
     </div>
     <div class="card-footer">
