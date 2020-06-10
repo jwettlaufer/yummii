@@ -29,9 +29,8 @@ My Favorites
                         <favorite :recipe="{{ $myFavorite->id }}" :favorited="{{ $myFavorite->favorited() ? 'true' : 'false' }}"></favorite>
                     </div>
                 </div>
+                @endif
         </li>
-        @endif
-
         @empty
         <p>You have no favorite recipes.</p>
         @endforelse

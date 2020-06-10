@@ -29,12 +29,11 @@ My Recipes
                         <favorite :recipe="{{ $userRecipe->id }}" :favorited="{{ $userRecipe->favorited() ? 'true' : 'false' }}"></favorite>
                     </div>
                 </div>
+                @endif
         </li>
-        @endif
-</div>
-@empty
-<p>You have no created recipes.</p>
-@endforelse
-</ul>
+        @empty
+        <p>You have no created recipes.</p>
+        @endforelse
+    </ul>
 </div>
 @endsection
